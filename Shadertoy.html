@@ -1,0 +1,55 @@
+<head>
+    <title>Shadertoy</title>
+    <meta description="https://www.shadertoy.com/">
+    <meta publisher="I'm Not MentaL">
+	<meta property="shadertoy" label="Shadertoy ID" type="textfield" default="MtcGD7"/>
+	<meta property="muted" label="Mute" type="boolean" default="0"/>
+	<meta property="paused" label="Pause" type="boolean" default="0"/>
+
+	<style>
+		iframe {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			z-index: -1;
+			pointer-events: none;
+		}
+	</style>
+</head>
+<body style="margin: 0; padding: 0;">
+	<iframe id="frame" frameborder="0" src="https://www.shadertoy.com/embed/MtcGD7?gui=false&t=10&paused=false&muted=false" allowfullscreen></iframe>
+</body>
+
+<script>
+	const iframe = document.getElementById('frame');
+	var isMuted = muted === 0 ? 'false' : 'true';
+	var isPaused = paused === 0 ? 'false' : 'true';
+
+	update();
+
+	function onshadertoyChanged() 
+	{
+		update();
+  	}
+
+	function onmutedChanged() 
+	{
+		isMuted = muted === 0 ? 'false' : 'true';
+		update();
+  	}
+
+	function onpausedChanged() 
+	{
+		isPaused = paused === 0 ? 'false' : 'true';
+		update();
+  	}
+
+	function update()
+	{
+		iframe.src = "https://www.shadertoy.com/embed/"+shadertoy+"?gui=false&t=10&paused="+isPaused+"&muted="+isMuted;
+	}
+</script>
